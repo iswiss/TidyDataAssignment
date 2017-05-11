@@ -7,9 +7,9 @@ feature_names <- read.table("UCI HAR Dataset/features.txt", stringsAsFactors=FAL
 colnames(features_test) = feature_names[,2]
 colnames(features_train) = feature_names[,2]
 
-# Grab only those columns that contain "std" or "mean" inside their name
-features_test <- features_test[ , grepl( "std" , names( features_test )) | grepl( "mean" , names( features_test )) ]
-features_train <- features_train[ , grepl( "std" , names( features_train )) | grepl( "mean" , names( features_train )) ]
+# Grab only those columns that contain "std()" or "mean()" inside their name
+features_test <- features_test[ , grepl( "std\\(\\)" , names( features_test )) | grepl( "mean\\(\\)" , names( features_test )) ]
+features_train <- features_train[ , grepl( "std\\(\\)" , names( features_train )) | grepl( "mean\\(\\)" , names( features_train )) ]
 
 # Read activity labels 
 feature_names <- read.table("UCI HAR Dataset/activity_labels.txt", stringsAsFactors=FALSE, strip.white=TRUE, col.names = c("ID", "Activity"))
@@ -29,10 +29,11 @@ dataset <- rbind(test_dataset, train_dataset)
 # Merge with Activity names
 dataset <- merge(dataset, feature_names, by.x="Activity_Label", by.y = "ID")
 # Remove activity number as we opt for label only
-dataset <- dataset[,2:82]
+dataset <- dataset[,2:69]
 
 # Reshape the data for step 5
 require(reshape2)
 final_dataset <- recast(dataset, Subject+Activity ~ variable, mean, id.var = c("Subject", "Activity"))
 # Write the data set
 write.table(final_dataset, file ="output.txt", row.names = FALSE)
+
