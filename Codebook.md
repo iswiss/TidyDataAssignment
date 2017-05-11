@@ -7,6 +7,7 @@ The raw data used to create the tidy dataset is described here:
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
 The following columns are in the dataset:
+
 Subject - Contains the subject ID from the original data
 
 Activity - Activity Label (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING)
